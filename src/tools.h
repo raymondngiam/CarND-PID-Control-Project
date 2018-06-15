@@ -17,9 +17,9 @@ public:
   */
   virtual ~Tools();
 
-	ofstream f_log;
+  ofstream f_log;
 
-	void Log(double cte, double speed, double steering_angle, double desired_speed);
+  void Log(double cte, double speed, double steering_angle, double desired_speed);
 };
 
 #endif /* TOOLS_H_ */

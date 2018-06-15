@@ -42,15 +42,13 @@ int main()
 	Tools tools;		// tools for logging
 
   PID pid_steer;
-	PID pid_throttle;
+  PID pid_throttle;
   // TODO: Initialize the pid variable.
-	//pid_steer.Init(0.05, 0, 0.1);
-	//pid_steer.Init(0.075, 0, 0.08);
-	//pid_steer.Init(0.078, 0.001, 0.1);	
-	pid_steer.Init(0.078, 0.002, 0.08);	
-	pid_steer.SetDesired(0.0);
-	pid_throttle.Init(0.1, 0.0002, 0.01);
-	double desired_speed = 30.0;
+	
+  pid_steer.Init(0.078, 0.002, 0.08);	
+  pid_steer.SetDesired(0.0);
+  pid_throttle.Init(0.1, 0.0002, 0.01);
+  double desired_speed = 30.0;
 	
 
   h.onMessage([&pid_steer,&pid_throttle,&tools,&desired_speed](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
@@ -75,19 +73,19 @@ int main()
           * NOTE: Feel free to play around with the throttle and speed. Maybe use
           * another PID controller to control the speed!
           */
-					pid_steer.UpdateError(cte,kDt);
-					steer_value = pid_steer.TotalError();
+          pid_steer.UpdateError(cte,kDt);
+          steer_value = pid_steer.TotalError();
 
-					double desired_speed_final;
-					if (fabs(cte)>kSlowDownCTEThreshold)
-						desired_speed_final = kSlowDownRate*desired_speed;
-					else
-						desired_speed_final = desired_speed;
-					pid_throttle.SetDesired(desired_speed_final);
-					pid_throttle.UpdateError(speed,kDt);
-					throttle_value = pid_throttle.TotalError();
+          double desired_speed_final;
+          if (fabs(cte)>kSlowDownCTEThreshold)
+            desired_speed_final = kSlowDownRate*desired_speed;
+          else
+            desired_speed_final = desired_speed;
+          pid_throttle.SetDesired(desired_speed_final);
+          pid_throttle.UpdateError(speed,kDt);
+          throttle_value = pid_throttle.TotalError();
 
-					tools.Log(cte,speed,angle,desired_speed_final);
+          tools.Log(cte,speed,angle,desired_speed_final);
           
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;

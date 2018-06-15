@@ -17,9 +17,9 @@ public:
   double Ki;
   double Kd;
 
-	double set_point;
-	double error_prev;
-	double error_sum;
+  double set_point;
+  double error_prev;
+  double error_sum;
 
   /*
   * Constructor
