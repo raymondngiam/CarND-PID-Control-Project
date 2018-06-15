@@ -45,7 +45,7 @@ Two separate PID controllers are implemented for controlling of steering angle a
 
 The steering angle controller is set to achieve a constant desired CTE of 0.
 
-The throttle controller is set to achieve two different desired speeds depending on the current value of CTE. The rational is as follows: if the current portion of the track is very curvy, the car will inevitably experience higher CTE relative to a straight portion. In that case, it is reasonable to slow down the vehicle.
+The throttle controller is set to achieve two different desired speeds depending on the current value of CTE. The rational is as follows: if the current portion of the track is very curvy, the car will inevitably experience higher CTE relative to a straight portion. In that case, it is reasonable to slow the vehicle down.
 
 The actual implementation of the throttle controller is as follow:
 
@@ -56,7 +56,7 @@ else
 	desired_speed = slow_down_rate * full_desired_speed;
 ```
 
-where `full_desired_speed` is set to 30 mph, and `slow_down_rate` is set to 0.70.
+where `threshold` is set to 1.2, `full_desired_speed` is set to 30 mph, and `slow_down_rate` is set to 0.70.
 
 
 **Parameter tuning strategy**
