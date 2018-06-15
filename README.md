@@ -50,15 +50,24 @@ The throttle controller is set to achieve two different desired speeds depending
 The actual implementation of the throttle controller is as follow:
 
 ```
-if (CTE '<' threshold)
+if (CTE < threshold)
 	desired_speed = full_desired_speed;
 else
 	desired_speed = slow_down_rate * full_desired_speed;
-
 ```
+
+where `full_desired_speed` is set to 30 mph, and `slow_down_rate` is set to 0.70.
 
 
 **Parameter tuning strategy**
+
+The parameters for the two PID controllers are tuned manually following the rules of thumb:
+
+1. Tune for Kp while keeping Ki and Kd zero. The objective is to reduce the error as much as possible. Note that there may be overshooting of the error.
+
+2. Next tune for the Kd term to minimize the overshooting.
+
+3. Observe if there is any systematic bias of the system, if yes, tune the Ki term to reduce the bias.
 
 ---
 
