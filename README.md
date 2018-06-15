@@ -112,5 +112,5 @@ The main program can be built and run by doing the following from the project to
 
 5. ./pid
 
-Open the simulator, select `Project 4: PID Controller` and press `Start`.
+Open the simulator, select `Project 4: PID Controller`.
 
