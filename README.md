@@ -37,7 +37,7 @@ However P-Controller and PD-Controller cannot correct systematic bias, hence the
 
 PID-Controller: provide control signal which proportional to the error, the temporal derivative of error and the integral (or summation for discrete case) of all the error ever observed:
 
-![](https://latex.codecogs.com/gif.latex?control=K_{p}e+K_{d}\frac{de}{dt}+K_{i}\sum e)
+![](https://latex.codecogs.com/gif.latex?control%3DK_%7Bp%7De%2BK_%7Bd%7D%5Cfrac%7Bde%7D%7Bdt%7D%2BK_%7Bi%7D%5Csum+e)
 
 **Controller Implementation**
 
