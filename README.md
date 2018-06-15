@@ -37,9 +37,26 @@ However P-Controller and PD-Controller cannot correct systematic bias, hence the
 
 PID-Controller: provide control signal which proportional to the error, the temporal derivative of error and the integral (or summation for discrete case) of all the error ever observed:
 
-![](https://latex.codecogs.com/gif.latex?control%3DK_%7Bp%7De%2BK_%7Bd%7D%5Cfrac%7Bde%7D%7Bdt%7D%2BK_%7Bi%7D%5Csum+e)
+![](https://latex.codecogs.com/gif.latex?control%3DK_%7Bp%7De%2BK_%7Bd%7D%5Cfrac%7Bde%7D%7Bdt%7D%2BK_%7Bi%7D%5Csum%20e)
 
 **Controller Implementation**
+
+Two separate PID controllers are implemented for controlling of steering angle and throttle.
+
+The steering angle controller is set to achieve a constant desired CTE of 0.
+
+The throttle controller is set to achieve two different desired speeds depending on the current value of CTE. The rational is as follows: if the current portion of the track is very curvy, the car will inevitably experience higher CTE relative to a straight portion. In that case, it is reasonable to slow down the vehicle.
+
+The actual implementation of the throttle controller is as follow:
+
+```
+if (CTE '<' threshold)
+	desired_speed = full_desired_speed;
+else
+	desired_speed = slow_down_rate * full_desired_speed;
+
+```
+
 
 **Parameter tuning strategy**
 
